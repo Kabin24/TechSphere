@@ -1,9 +1,16 @@
+import HeroSection from "./HeroSection.jsx";
 import Navbar from "./shared/Navbar.jsx";
 
 const Home = () => {
   return (
     <>
-      <Navbar />
+      <div>
+        <Navbar />
+        <HeroSection />
+        {/* <CategoryCarousel/>
+    <LatestJobs/>
+    <Footer/> */}
+      </div>
     </>
   );
 };
