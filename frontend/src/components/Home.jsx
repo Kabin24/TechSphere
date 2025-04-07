@@ -1,3 +1,5 @@
+import LatestJobs from "./LatestJobs.jsx";
+import CategoryCarousel from "./CategoryCarousel.jsx";
 import HeroSection from "./HeroSection.jsx";
 import Navbar from "./shared/Navbar.jsx";
 
@@ -7,9 +9,9 @@ const Home = () => {
       <div>
         <Navbar />
         <HeroSection />
-        {/* <CategoryCarousel/>
-    <LatestJobs/>
-    <Footer/> */}
+        <CategoryCarousel />
+        <LatestJobs />
+        {/* // <Footer/>  */}
       </div>
     </>
   );
