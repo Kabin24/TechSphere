@@ -3,14 +3,14 @@ import { Button } from "../ui/button";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-red-900 text-gray-300 pt-16 pb-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="space-y-4">
             <h3 className="text-2xl font-bold text-white">
-              <span className="text-brandRed">Job</span>Sewa
+              <span className="text-red-600">Job</span>Sewa
             </h3>
-            <p className="text-gray-400">
+            <p className="text-white">
               Connecting talent with opportunity. Find your dream job or the
               perfect candidate with our platform.
             </p>
@@ -50,7 +50,7 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-white">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-brandRed transition-colors">
+                <a href="#" className="hover:text-red-500 transition-colors">
                   Home
                 </a>
               </li>
