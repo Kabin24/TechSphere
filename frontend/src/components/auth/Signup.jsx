@@ -167,17 +167,22 @@ const Signup = () => {
                 </div>
               </div>
             </div>
-
-            {loading ? (
-              <Button className="w-full my-4">
-                {" "}
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait{" "}
-              </Button>
-            ) : (
-              <Button type="submit" className="w-full my-4">
-                Signup
-              </Button>
-            )}
+            <div className="flex justify-center">
+              {loading ? (
+                <Button className="w-full my-4">
+                  {" "}
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait{" "}
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  className="w-40 my-4 
+                 bg-brandRed  rounded-full text-xl text-white hover:bg-blue-800"
+                >
+                  Signup
+                </Button>
+              )}
+            </div>
 
             <div className="text-center  text-black">
               Already have an account?{" "}

@@ -30,7 +30,7 @@ const HeroSection = () => {
         </h1>
 
         {/* Subtitle with animated underline */}
-        <p className="text-gray-600 text-lg max-w-2xl relative group">
+        <p className="text-black  text-center  text-lg max-w-2xl relative group">
           Unlock endless career opportunities. Discover your next job with ease,
           tailored just for you.
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brandRed group-hover:w-full transition-all duration-500"></span>
@@ -41,14 +41,14 @@ const HeroSection = () => {
           <input
             type="text"
             placeholder="Job title, keywords, or company..."
-            className="flex-1 px-6 py-4 text-base outline-none bg-white placeholder-gray-400"
+            className="flex-1 px-6 py-4 text-black outline-none bg-white placeholder-gray-400"
           />
           <Button
             className="rounded-r-full bg-brandRed hover:bg-red-600 px-8 gap-2 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            size="lg"
+            size="xl"
           >
-            <Search className="h-5 w-5" />
-            <span className="hidden sm:inline">Search</span>
+            <Search className="h-5 w-5 text-stone-50" />
+            <span className="hidden sm:inline text-slate-50">Search</span>
           </Button>
         </div>
 
@@ -66,7 +66,7 @@ const HeroSection = () => {
                 clipRule="evenodd"
               />
             </svg>
-            10,000+ Jobs
+            10,00+ Jobs
           </span>
           <span className="flex items-center gap-1">
             <svg
@@ -80,7 +80,7 @@ const HeroSection = () => {
                 clipRule="evenodd"
               />
             </svg>
-            5,000+ Companies
+            5,00+ Companies
           </span>
           <span className="flex items-center gap-1">
             <svg
@@ -94,7 +94,7 @@ const HeroSection = () => {
                 clipRule="evenodd"
               />
             </svg>
-            1M+ Candidates
+            10000+ Candidates
           </span>
         </div>
       </div>

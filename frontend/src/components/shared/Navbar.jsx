@@ -15,7 +15,7 @@ const Navbar = () => {
         <div>
           <Link to="/">
             <h1 className="text-2xl font-bold">
-              Job<span className="text-[#ca2a2a]">Portal</span>
+              Job<span className="text-[#ca2a2a]">Sewa</span>
             </h1>
           </Link>
         </div>

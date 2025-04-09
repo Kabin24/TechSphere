@@ -22,7 +22,7 @@ const category = [
 
 const CategoryCarousel = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
           <span className="relative inline-block">
@@ -30,7 +30,7 @@ const CategoryCarousel = () => {
             <span className="absolute bottom-0 left-0 w-full h-1 bg-brandRed mt-1"></span>
           </span>
         </h2>
-        <p className="text-gray-900 max-w-2xl mx-auto text-lg">
+        <p className="text-black max-w-2xl mx-auto text-lg">
           Choose your interest and find relevant jobs tailored for you
         </p>
       </div>
@@ -48,7 +48,7 @@ const CategoryCarousel = () => {
                   <div className="relative rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 p-6 text-center border border-gray-100 hover:border-brandRed/30 h-full flex items-center justify-center">
                     <Button
                       variant="ghost"
-                      className="text-base font-medium text-gray-800 hover:text-brandRed px-4 py-6 w-full h-full flex items-center justify-center hover:bg-transparent"
+                      className="text-base font-medium  text-gray-800 hover:text-brandRed px-4 py-6 w-full h-full flex items-center justify-center hover:bg-transparent"
                     >
                       <span className="relative z-10">
                         {cat}
@@ -64,7 +64,6 @@ const CategoryCarousel = () => {
           <CarouselNext className="-right-8 hidden md:flex" />
         </Carousel>
 
-        {/* Mobile indicators */}
         <div className="flex justify-center gap-2 mt-8 md:hidden">
           {category.slice(0, 4).map((_, index) => (
             <div key={index} className="w-2 h-2 rounded-full bg-gray-300"></div>
