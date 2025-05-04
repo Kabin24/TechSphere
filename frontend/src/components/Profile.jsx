@@ -5,15 +5,20 @@ import { Contact, Mail, Pen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "./ui/label";
 import AppliedJobTable from "./AppliedJobTable";
+import { useState } from "react";
+import UpdateProfileDialog from "./UpdateProfileDialog";
+import { useSelector } from "react-redux";
 
-const skills = ["Html", "css", "javascript"];
+const skills = ["Html", "css", "javascript", "Python"];
 const isResume = true;
 
 const Profile = () => {
+  const [open, setOpen] = useState(false);
+  const { user } = useSelector((store) => store.auth);
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-black-50 min-h-screen">
       <Navbar />
-      <div className="max-w-4xl mx-auto bg-white shadow-lg border border-gray-200 rounded-2xl my-8 p-8 space-y-8">
+      <div className="max-w-4xl mx-auto bg-white shadow-lg border border-black-200 rounded-2xl my-8 p-8 space-y-8">
         {/* Profile Header */}
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-6">
@@ -25,14 +30,17 @@ const Profile = () => {
               />
             </Avatar>
             <div>
-              <h1 className="font-semibold text-2xl text-gray-800">kabin</h1>
-              <p className="text-gray-600 mt-1">
+              <h1 className="font-semibold text-2xl text-black-800">
+                {user?.fullname}
+              </h1>
+              <p className="text-black mt-1">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Molestias, culpa.
               </p>
             </div>
           </div>
           <Button
+            onClick={() => setOpen(true)}
             variant="outline"
             className="border rounded-full border-blue-500 hover:border-blue-700 hover:shadow-md transition"
           >
@@ -42,23 +50,23 @@ const Profile = () => {
         </div>
 
         {/* Contact Info */}
-        <div className="space-y-3 text-gray-700">
+        <div className="space-y-3 text-black-700">
           <div className="flex items-center gap-3">
-            <Mail className="w-5 h-5 text-gray-500" />
-            <span>kabinshrestha37&@gmail.com</span>
+            <Mail className="w-5 h-5 text-black" />
+            <span>{user?.email}</span>
           </div>
           <div className="flex items-center gap-3">
-            <Contact className="w-5 h-5 text-gray-500" />
-            <span>+977 981109623</span>
+            <Contact className="w-5 h-5 text-black-500" />
+            <span>{user?.phoneNumber}</span>
           </div>
         </div>
 
         {/* Skills */}
         <div>
-          <h1 className="font-semibold text-lg text-gray-800 mb-2">Skills</h1>
+          <h1 className="font-semibold text-lg text-black-800 mb-2">Skills</h1>
           <div className="flex flex-wrap items-center gap-2">
-            {skills.length !== 0 ? (
-              skills.map((item, index) => (
+            {user?.profile?.skills.length !== 0 ? (
+              user?.profile?.skills.map((item, index) => (
                 <Badge
                   key={index}
                   className="px-3 py-1 rounded-full bg-blue-100 text-blue-800 font-medium"
@@ -74,7 +82,7 @@ const Profile = () => {
 
         {/* Resume Section */}
         <div className="grid w-full max-w-sm items-start gap-1.5">
-          <Label className="text-md font-semibold text-gray-800">Resume</Label>
+          <Label className="text-md font-semibold text-black-800">Resume</Label>
           {isResume ? (
             <a
               target="_blank"
@@ -84,15 +92,18 @@ const Profile = () => {
               kabinResume
             </a>
           ) : (
-            <span className="text-gray-500">NA</span>
+            <span className="text-black-500">NA</span>
           )}
         </div>
+      </div>
 
-        {/* Applied Jobs */}
-        <div className="bg-gray-100 p-5 rounded-2xl shadow-inner">
-          <h1 className="font-bold text-lg text-gray-800 mb-4">Applied Jobs</h1>
-          <AppliedJobTable />
-        </div>
+      <div className="bg-black-100 p-5 rounded-2xl shadow-inner">
+        <h1 className="font-bold text-3xl text-black mb-4">Applied Jobs</h1>
+        <AppliedJobTable />
+      </div>
+      <div>
+        {" "}
+        <UpdateProfileDialog open={open} setOpen={setOpen} />
       </div>
     </div>
   );

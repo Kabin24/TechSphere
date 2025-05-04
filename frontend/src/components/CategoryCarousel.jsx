@@ -27,7 +27,7 @@ const CategoryCarousel = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
           <span className="relative inline-block">
             Explore Categories
-            <span className="absolute bottom-0 left-0 w-full h-1 bg-brandRed mt-1"></span>
+            <span className="absolute bottom-0 left-0 w-full h-1 bg-brandRed  mt-1"></span>
           </span>
         </h2>
         <p className="text-black max-w-2xl mx-auto text-lg">
