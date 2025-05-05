@@ -13,7 +13,7 @@ const authSlice = createSlice({
             state.loading = action.payload;
         },
         setUser: (state, action) => {
-            state.loading = action.payload
+            state.user = action.payload
         }
     }
 

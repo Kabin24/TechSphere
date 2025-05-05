@@ -9,7 +9,7 @@ import { useState } from "react";
 import UpdateProfileDialog from "./UpdateProfileDialog";
 import { useSelector } from "react-redux";
 
-const skills = ["Html", "css", "javascript", "Python"];
+//const skills = ["Html", "css", "javascript", "Python"];
 const isResume = true;
 
 const Profile = () => {
@@ -33,10 +33,7 @@ const Profile = () => {
               <h1 className="font-semibold text-2xl text-black-800">
                 {user?.fullname}
               </h1>
-              <p className="text-black mt-1">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Molestias, culpa.
-              </p>
+              <p className="text-black mt-1">{user?.profile?.bio}</p>
             </div>
           </div>
           <Button
@@ -86,10 +83,10 @@ const Profile = () => {
           {isResume ? (
             <a
               target="_blank"
-              href="http://youtube.com"
+              href={user?.profile?.resume}
               className="text-blue-600 hover:underline"
             >
-              kabinResume
+              {user?.profile?.resumeOriginalName}
             </a>
           ) : (
             <span className="text-black-500">NA</span>
