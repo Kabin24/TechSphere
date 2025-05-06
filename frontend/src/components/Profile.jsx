@@ -24,7 +24,7 @@ const Profile = () => {
           <div className="flex items-center gap-6">
             <Avatar className="h-24 w-24 rounded-full ring-2 ring-black">
               <AvatarImage
-                src="https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg"
+                src={user?.profile?.profilePhoto}
                 alt="profile"
                 className="rounded-full"
               />

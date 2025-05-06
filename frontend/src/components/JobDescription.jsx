@@ -1,22 +1,54 @@
+import { useParams } from "react-router-dom";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import { useEffect } from "react";
+import axios from "axios";
+import { JOB_API_END_POINT } from "@/utils/constant";
+import { setSingleJob } from "@/redux/jobSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const JobDescription = () => {
-  const isApplied = true;
+  const { singleJob } = useSelector((store) => store.job);
+  const { user } = useSelector((store) => store.auth);
+  const isApplied =
+    singleJob?.applications?.some(
+      (application) => application.applicant === user?._id
+    ) || false;
+  const params = useParams();
+  const jobId = params.id;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchSingleJob = async () => {
+      try {
+        const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, {
+          withCredentials: true,
+        });
+        console.log(res);
+        if (res.data.success) {
+          dispatch(setSingleJob(res.data.job));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchSingleJob();
+  }, [jobId, dispatch, user?._id]);
+
   return (
     <div className="max-w-6xl mx-auto my-10">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-bold text-xl">Frontend Devloper</h1>
+          <h1 className="font-bold text-xl">{singleJob?.title}</h1>
           <div className="flex items-center gap-2 mt-4">
             <Badge className="text-blue-600 font-bold bg-blue-50">
-              4 Positions
+              {singleJob?.position} Positions
             </Badge>
             <Badge className="text-red-600 font-bold bg-red-50">
-              Part Time
+              {singleJob?.jobType}
             </Badge>
             <Badge className="text-purple-600 font-bold bg-purple-50">
-              24 LPA
+              {singleJob?.salary} LPA
             </Badge>
           </div>
         </div>
@@ -37,35 +69,43 @@ const JobDescription = () => {
       <div className="my-4">
         <h1 className="font-bold my-1">
           Role:{" "}
-          <span className="pl-4 font-normal text-gray-800">ui designer</span>
+          <span className="pl-4 font-normal text-gray-800">
+            {singleJob?.title}
+          </span>
         </h1>
         <h1 className="font-bold my-1">
           Location:{" "}
-          <span className="pl-4 font-normal text-gray-800">kathmandu</span>
+          <span className="pl-4 font-normal text-gray-800">
+            {singleJob?.location}
+          </span>
         </h1>
         <h1 className="font-bold my-1">
           Description:{" "}
           <span className="pl-4 font-normal text-gray-800">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt non
-            necessitatibus, cumque rerum iusto laudantium corrupti libero
-            dignissimos at fugiat voluptate excepturi autem id aperiam? Odit
-            corrupti unde cumque aperiam.
+            {singleJob?.description}
           </span>
         </h1>
         <h1 className="font-bold my-1">
           Experience:{" "}
-          <span className="pl-4 font-normal text-gray-800">2 yrs</span>
+          <span className="pl-4 font-normal text-gray-800">
+            {singleJob?.experience}yrs
+          </span>
         </h1>
         <h1 className="font-bold my-1">
-          Salary: <span className="pl-4 font-normal text-gray-800">12 LPA</span>
+          {singleJob?.salary}{" "}
+          <span className="pl-4 font-normal text-gray-800">LPA</span>
         </h1>
         <h1 className="font-bold my-1">
           Total Applicants:{" "}
-          <span className="pl-4 font-normal text-gray-800">2</span>
+          <span className="pl-4 font-normal text-gray-800">
+            {singleJob?.applications?.length}
+          </span>
         </h1>
         <h1 className="font-bold my-1">
           Posted Date:{" "}
-          <span className="pl-4 font-normal text-gray-800">17-07-2024</span>
+          <span className="pl-4 font-normal text-gray-800">
+            {singleJob?.createdAt.split("T")[0]}
+          </span>
         </h1>
       </div>
     </div>

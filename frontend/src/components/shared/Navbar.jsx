@@ -1,15 +1,13 @@
-import { PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
-import { Link, useNavigate } from "react-router-dom";
-
-import { Popover } from "../ui/popover";
-import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import { LogOut, User2 } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "sonner";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/redux/authSlice";
+import { toast } from "sonner";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
@@ -33,84 +31,137 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-white">
-      <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
-        <div>
-          <Link to="/">
-            <h1 className="text-2xl font-bold">
-              Job<span className="text-[#ca2a2a]">Sewa</span>
-            </h1>
-          </Link>
-        </div>
-        <div className="flex items-center gap-12  !hover:underline-offset-2">
-          <ul className="flex font-medium items-center gap-5">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/Jobs">Jobs</Link>
-            </li>
-            <li>
-              <Link to="/Browse">Browse</Link>
-            </li>
+    <div className="bg-white shadow-sm">
+      <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-4">
+        <Link to="/">
+          <h1 className="text-2xl font-bold hover:opacity-80 transition-opacity">
+            Tech<span className="text-[#F83002]">Sphere</span>
+          </h1>
+        </Link>
+
+        <div className="flex items-center gap-8">
+          <ul className="flex font-medium items-center gap-6">
+            {user && user.role === "recruiter" ? (
+              <>
+                <li>
+                  <Link
+                    to="/admin/companies"
+                    className="hover:text-[#6A38C2] transition-colors"
+                  >
+                    Companies
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/admin/jobs"
+                    className="hover:text-[#6A38C2] transition-colors"
+                  >
+                    Jobs
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/"
+                    className="hover:text-[#6A38C2] transition-colors"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/jobs"
+                    className="hover:text-[#6A38C2] transition-colors"
+                  >
+                    Jobs
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/browse"
+                    className="hover:text-[#6A38C2] transition-colors"
+                  >
+                    Browse
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
+
           {!user ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Link to="/login">
-                {" "}
                 <Button
                   variant="outline"
-                  className="border-gray-400 text-black  rounded-full "
+                  className="border-[#6A38C2] rounded-xl "
                 >
                   Login
                 </Button>
               </Link>
               <Link to="/signup">
-                <Button className="bg-red-600 text-white hover:bg-red-900 rounded-full">
-                  Signup
-                </Button>
+                <Button className="bg-[#6A38C2] rounded-xl ">Signup</Button>
               </Link>
             </div>
           ) : (
             <Popover>
               <PopoverTrigger asChild>
-                <Avatar className="cursor-pointer w-10 h-10">
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                    className="w-10 h-10 rounded-full"
-                  />
-                </Avatar>
-              </PopoverTrigger>
-              <PopoverContent className="w-80 p-4 shadow-lg rounded-lg bg-white">
-                <div className="flex gap-4 space-y-2">
-                  {" "}
-                  <Avatar className="cursor-pointer w-12 h-12">
+                <button className="rounded-full focus:outline-none hover:ring-2 hover:ring-[#6A38C2]/50 transition-all">
+                  <Avatar className="cursor-pointer w-9 h-9 border border-[#6A38C2]/20">
                     <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
-                      className="w-10 h-10 rounded-full"
+                      src={user?.profile?.profilePhoto}
+                      alt="User avatar"
+                      className="object-cover"
                     />
                   </Avatar>
-                  <div>
-                    <h4 className="font-medium">Kabin shrestha</h4>
-                    <p className="flex text-sm text-gray-500">
-                      Lorem ipsum dolor sit amet.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex w-fit items-center gap-2 cursor-pointer  hover:underline">
-                  <User2 />
-                  <Link to="/profile">
-                    <Button variant="link">View Profile</Button>
-                  </Link>
-                </div>
+                </button>
+              </PopoverTrigger>
 
-                <div className="flex w-fit items-center gap-2 cursor-pointer hover:underline">
-                  <LogOut />
-                  <Button onClick={logoutHandler} variant="Link">
-                    Logout
-                  </Button>
+              <PopoverContent
+                className="w-64 p-4 shadow-lg rounded-xl border border-gray-100"
+                align="end"
+                sideOffset={10}
+              >
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="w-10 h-10 border border-[#6A38C2]/20">
+                      <AvatarImage
+                        src={user?.profile?.profilePhoto}
+                        alt="User avatar"
+                      />
+                    </Avatar>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">
+                        {user?.fullname}
+                      </h4>
+                      <p className="text-sm text-gray-500 line-clamp-1">
+                        {user?.profile?.bio || "No bio"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1 border-t pt-2">
+                    {user && user.role === "student" && (
+                      <Link
+                        to="/profile"
+                        className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 text-gray-700 hover:text-[#6A38C2] transition-colors"
+                      >
+                        <User2 className="w-4 h-4" />
+                        <span className="text-sm font-medium">
+                          View Profile
+                        </span>
+                      </Link>
+                    )}
+
+                    <button
+                      onClick={logoutHandler}
+                      className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 text-gray-700 hover:text-red-600 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span className="text-sm font-medium">Logout</span>
+                    </button>
+                  </div>
                 </div>
               </PopoverContent>
             </Popover>

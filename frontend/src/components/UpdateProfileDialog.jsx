@@ -47,6 +47,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     formData.append("phoneNumber", input.phoneNumber);
     formData.append("bio", input.bio);
     formData.append("skills", input.skills);
+
     if (input.file) {
       formData.append("file", input.file);
     }
@@ -66,14 +67,15 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
       if (res.data.success) {
         dispatch(setUser(res.data.user));
         toast.success(res.data.message);
+        setOpen(false);
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message);
     } finally {
       setLoading(false);
     }
-    setOpen(false);
+
     console.log(input);
   };
 
@@ -167,18 +169,20 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
               </div>
             </div>
             <DialogFooter>
-              {loading ? (
-                <Button className="w-full my-4">
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
-                </Button>
-              ) : (
-                <Button
-                  type="submit"
-                  className="w-full my-4 bg-brandRed hover:bg-red-800 rounded-2xl"
-                >
-                  Update
-                </Button>
-              )}
+              <Button
+                type="submit"
+                className="w-full my-4 bg-brandRed hover:bg-red-800 rounded-2xl"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </>
+                ) : (
+                  "Update"
+                )}
+              </Button>
             </DialogFooter>
           </form>
         </DialogContent>
