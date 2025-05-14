@@ -35,7 +35,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-4">
         <Link to="/">
           <h1 className="text-2xl font-bold hover:opacity-80 transition-opacity">
-            Tech<span className="text-[#F83002]">Sphere</span>
+            Tech<span className="text-[#DC2626]">Sphere</span>
           </h1>
         </Link>
 
@@ -46,7 +46,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/admin/companies"
-                    className="hover:text-[#6A38C2] transition-colors"
+                    className="hover:text-[#DC2626] transition-colors"
                   >
                     Companies
                   </Link>
@@ -54,7 +54,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/admin/jobs"
-                    className="hover:text-[#6A38C2] transition-colors"
+                    className="hover:text-[#DC2626] transition-colors"
                   >
                     Jobs
                   </Link>
@@ -65,7 +65,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/"
-                    className="hover:text-[#6A38C2] transition-colors"
+                    className="hover:text-[#DC2626] transition-colors"
                   >
                     Home
                   </Link>
@@ -73,7 +73,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/jobs"
-                    className="hover:text-[#6A38C2] transition-colors"
+                    className="hover:text-[#DC2626] transition-colors"
                   >
                     Jobs
                   </Link>
@@ -81,7 +81,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/browse"
-                    className="hover:text-[#6A38C2] transition-colors"
+                    className="hover:text-[#DC2626] transition-colors"
                   >
                     Browse
                   </Link>
@@ -95,19 +95,21 @@ const Navbar = () => {
               <Link to="/login">
                 <Button
                   variant="outline"
-                  className="border-[#6A38C2] rounded-xl "
+                  className="border-[#DC2626] rounded-xl "
                 >
                   Login
                 </Button>
               </Link>
               <Link to="/signup">
-                <Button className="bg-[#6A38C2] rounded-xl ">Signup</Button>
+                <Button className="bg-[#DC2626] rounded-xl hover:bg-[#8d2424]  text-white">
+                  Signup
+                </Button>
               </Link>
             </div>
           ) : (
             <Popover>
               <PopoverTrigger asChild>
-                <button className="rounded-full focus:outline-none hover:ring-2 hover:ring-[#6A38C2]/50 transition-all">
+                <button className="rounded-full focus:outline-none hover:ring-2 hover:ring-[#DC2626]/50 transition-all">
                   <Avatar className="cursor-pointer w-9 h-9 border border-[#6A38C2]/20">
                     <AvatarImage
                       src={user?.profile?.profilePhoto}
