@@ -1,9 +1,27 @@
 import { Search } from "lucide-react";
 import { Button } from "./ui/button";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSearchedQuery } from "@/redux/jobSlice";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const searchJobHandler = () => {
+    dispatch(setSearchedQuery(query));
+    navigate("/browse");
+  };
   return (
-    <section className="relative py-20 px-4 overflow-hidden">
+    <section
+      className="relative py-24 px-4 overflow-hidden bg-cover bg-black bg-center bg-no-repeat"
+      style={{
+        backgroundImage:
+          "linear-gradient(to bottom right, rgba(255,255,255,0.9), rgba(245,245,245,0.95)), url('https://images.unsplash.com/photo-1605902711622-cfb43c4437b1?auto=format&fit=crop&w=1400&q=80')",
+      }}
+    >
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-32 h-32 bg-brandRed/10 rounded-full blur-3xl"></div>
@@ -41,9 +59,11 @@ const HeroSection = () => {
           <input
             type="text"
             placeholder="Job title, keywords, or company..."
-            className="flex-1 px-6 py-4 text-black outline-none bg-white placeholder-gray-400"
+            onChange={(e) => setQuery(e.target.value)}
+            className="flex-1 px-6 py-4 !text-black outline-none bg-white placeholder-gray-400 "
           />
           <Button
+            onClick={searchJobHandler}
             className="rounded-r-full bg-brandRed hover:bg-red-600 px-8 gap-2 transition-all duration-300 hover:scale-105 hover:shadow-lg"
             size="xl"
           >
@@ -66,7 +86,7 @@ const HeroSection = () => {
                 clipRule="evenodd"
               />
             </svg>
-            10,00+ Jobs
+            1000+ Jobs
           </span>
           <span className="flex items-center gap-1">
             <svg
@@ -80,7 +100,7 @@ const HeroSection = () => {
                 clipRule="evenodd"
               />
             </svg>
-            5,00+ Companies
+            50+ Companies
           </span>
           <span className="flex items-center gap-1">
             <svg

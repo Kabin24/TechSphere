@@ -4,7 +4,7 @@ import { Input } from "../ui/input.jsx";
 import { RadioGroup } from "../ui/radio-group.jsx";
 import { Button } from "../ui/button.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant.js";
 import { toast } from "sonner";
@@ -22,7 +22,7 @@ const Signup = () => {
     file: "",
   });
 
-  const { loading } = useSelector((store) => store.auth);
+  const { loading, user } = useSelector((store) => store.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const changeEventHandler = (e) => {
@@ -62,6 +62,12 @@ const Signup = () => {
       dispatch(setLoading(false));
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
   return (
     <>
       <div>

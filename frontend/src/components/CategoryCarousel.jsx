@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { Button } from "./ui/button";
 import {
   Carousel,
@@ -6,6 +7,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+
+import { useNavigate } from "react-router-dom";
+import { setSearchedQuery } from "@/redux/jobSlice";
 
 const category = [
   "Frontend Developer",
@@ -21,16 +25,22 @@ const category = [
 ];
 
 const CategoryCarousel = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const searchJobHandler = (query) => {
+    dispatch(setSearchedQuery(query));
+    navigate("/browse");
+  };
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-[#E7E7E7]">
       <div className="text-center mb-12 px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
           <span className="relative inline-block">
-            Explore Categories
-            <span className="absolute bottom-0 left-0 w-full h-1 bg-brandRed mt-1"></span>
+            Explore <span className="text-brandRed">Categories </span>
           </span>
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+        <p className="text-black max-w-2xl mx-auto text-lg">
           Choose your interest and find relevant jobs tailored for you
         </p>
       </div>
@@ -45,8 +55,9 @@ const CategoryCarousel = () => {
               >
                 <div className="relative group p-1">
                   <div className="absolute inset-0 bg-gradient-to-br from-brandRed/5 via-transparent to-blue-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative rounded-xl bg-white shadow-xs hover:shadow-md transition-all duration-300 p-6 text-center border border-gray-200 hover:border-brandRed/40 h-full flex items-center justify-center group-hover:scale-[1.02]">
+                  <div className="relative rounded-xl bg-white shadow-xs hover:shadow-md transition-all duration-300 p-6 text-center border border-gray-200 border-brandRed/40 h-full flex items-center justify-center group-hover:scale-[1.02]">
                     <Button
+                      onClick={() => searchJobHandler(cat)}
                       variant="ghost"
                       className="text-base font-medium text-gray-800 hover:text-brandRed px-4 py-6 w-full h-full flex items-center justify-center hover:bg-transparent transition-colors duration-200"
                     >
