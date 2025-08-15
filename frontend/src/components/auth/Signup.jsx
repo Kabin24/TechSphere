@@ -45,16 +45,12 @@ const Signup = () => {
     }
 
     try {
-      const res = await axios.post(
-        "https://techsphere-f5b7.onrender.com/api/v1/user/register",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
       if (res.data.success) {
         navigate("/login");
         toast.success(res.data.message);
